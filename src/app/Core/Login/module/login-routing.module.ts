@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FinMontoComponent } from 'src/app/Financiero/components/finMonto/finMonto.component';
 
 const routes: Routes = [
-  { path:'monto',component: FinMontoComponent}
+  { path:'montos',component: FinMontoComponent}
 ];
 
 @NgModule({

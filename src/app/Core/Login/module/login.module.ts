@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './login-routing.module';
-import { LoginComponent } from '../components/login.component';
 import { FormsModule } from '@angular/forms';
-
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from 'angular-datatables';
+
+import { LoginComponent } from '../components/login.component';
+import { FinMontoComponent } from 'src/app/Financiero/components/finMonto/finMonto.component';
 
 @NgModule({
   imports: [
@@ -14,10 +15,16 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [
+    LoginComponent,
+    FinMontoComponent
+  ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [
+    LoginComponent
+  ]
 })
 export class LoginModule { }

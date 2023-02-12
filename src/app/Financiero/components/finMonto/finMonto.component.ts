@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FinMontModel } from '../../models/finMonto.model';
+import { FinMontoService } from '../../services/finMonto/finMonto.service';
+
 
 @Component({
   selector: 'app-finMonto',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinMontoComponent implements OnInit {
 
-  constructor() { }
+  montos: FinMontModel[] = [];
+  temp: Object=false;
 
-  ngOnInit() {
+  constructor(
+    private montoService: FinMontoService
+  ) { }
+
+  ngOnInit(): void {
+    this.getAllMontos()
+
+
+
+  }
+
+  public getAllMontos() {
+    this.montoService.getAllMontos().subscribe(
+      (response: any) => {
+        for (let i = 0; i < response.length; i++) {
+          const element:FinMontModel = response[i];
+          if(element.monFechaFin == null){
+            element.monFechaFin = 'Activo';
+          }
+        }
+
+        this.montos = response;
+
+
+        this.temp = true;
+      }, (error) => console.warn(error)
+    )
   }
 
 }

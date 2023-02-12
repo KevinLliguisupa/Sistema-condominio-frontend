@@ -1,7 +1,9 @@
+import { FinTipoDeudaModel } from "./finTipoDeuda.model";
+
 export interface FinMontModel {
-    mon_id:number;
-    mon_valor:number;
-    mon_fecha_asignacion:Date;
-    mon_fecha_fin:Date;
-    tde_id:number;
+    monId: number;
+    monValor: number;
+    monFechaAsignacion: Date;
+    monFechaFin: String;
+    tipoDeuda: FinTipoDeudaModel;
 }
