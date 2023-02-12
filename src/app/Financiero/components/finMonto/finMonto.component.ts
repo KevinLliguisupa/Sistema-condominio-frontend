@@ -6,7 +6,7 @@ import { FinMontoService } from '../../services/finMonto/finMonto.service';
 @Component({
   selector: 'app-finMonto',
   templateUrl: './finMonto.component.html',
-  styleUrls: ['./finMonto.component.css']
+  styleUrls: ['finMonto.component.min.css']
 })
 export class FinMontoComponent implements OnInit {
 
