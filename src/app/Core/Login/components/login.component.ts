@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import { ApiService } from '../module/api.service';
+import { LoginService } from '../services/login.service';
 import { NgFor } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { Credentials } from 'src/app/Control/models/ctrUsuario.model';
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private apiService: LoginService,
 
 
   ) { }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     this.apiService.login(this.creds)
     .subscribe(response=>{
-      this.router.navigate(['/usuarios']);
+      this.router.navigate(['/menu']);
     })
 
   }

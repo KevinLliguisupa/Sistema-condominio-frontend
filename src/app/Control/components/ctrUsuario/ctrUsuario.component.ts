@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CtrUsuarioModel } from '../../models/ctrUsuario.model';
-import { ApiService } from 'src/app/Core/Login/module/api.service';
+import { CtrUsuarioService } from '../../services/ctrUsuario/ctrUsuario.service';
 
 
 @Component({
@@ -13,13 +13,13 @@ export class CtrUsuarioComponent implements OnInit {
   usuarios?: CtrUsuarioModel[];
 
   constructor(
-    private apiService: ApiService
+    private usuarioService: CtrUsuarioService
   ) { }
 
   ngOnInit(): void {
     console.log('form value');
 
-    this.apiService.getUsuarios()
+    this.usuarioService.getUsuarios()
     .subscribe((response:any)=>{
       this.usuarios=response.content;
     }, (error) => console.warn(error)

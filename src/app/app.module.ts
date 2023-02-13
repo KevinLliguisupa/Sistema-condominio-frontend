@@ -4,12 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { FinMontoComponent } from 'src/app/Financiero/components/finMonto/finMonto.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './login-routing.module';
-import { LoginComponent } from '../components/login.component';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from 'src/app/helpers/auth.interceptor';
 import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUsuario.component';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './Core/Login/components/login.component';
 
 @NgModule({
 
@@ -26,15 +27,14 @@ import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUs
     BrowserAnimationsModule
   ],
   declarations: [
-    LoginComponent,
+    AppComponent,
     FinMontoComponent,
-    CtrUsuarioComponent
+    CtrUsuarioComponent,
+    LoginComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
   }],
-  bootstrap: [
-    LoginComponent
-  ]
+  bootstrap: [AppComponent]
 })
-export class LoginModule { }
+export class AppModule { }
