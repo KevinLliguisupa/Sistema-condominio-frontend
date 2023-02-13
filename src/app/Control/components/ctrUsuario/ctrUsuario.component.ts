@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CtrUsuarioModel } from '../../models/ctrUsuario.model';
+import { ApiService } from 'src/app/Core/Login/module/api.service';
+
 
 @Component({
   selector: 'app-ctrUsuario',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CtrUsuarioComponent implements OnInit {
 
-  constructor() { }
+  usuarios?: CtrUsuarioModel[];
 
-  ngOnInit() {
-  }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
+  ngOnInit(): void {
+    console.log('form value');
+
+    this.apiService.getUsuarios()
+    .subscribe((response:any)=>{
+      this.usuarios=response.content;
+    }, (error) => console.warn(error)
+    )
+
+
+}
 }
