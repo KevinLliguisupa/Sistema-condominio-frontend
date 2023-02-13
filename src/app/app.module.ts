@@ -12,6 +12,9 @@ import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUs
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Core/Login/components/login.component';
 
+import {TableModule} from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
 
   imports: [
@@ -24,7 +27,9 @@ import { LoginComponent } from './Core/Login/components/login.component';
     FormsModule,
     HttpClientModule,
     DataTablesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule,
+    ButtonModule
   ],
   declarations: [
     AppComponent,
