@@ -11,9 +11,23 @@ import { AuthInterceptor } from 'src/app/helpers/auth.interceptor';
 import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUsuario.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Core/Login/components/login.component';
+import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
+import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
 
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {PaginatorModule} from 'primeng/paginator';
+import {PanelModule} from 'primeng/panel';
+import {CardModule} from 'primeng/card';
+import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
+import { CurrencyPipe } from '@angular/common';
+
 
 @NgModule({
 
@@ -29,17 +43,30 @@ import { ButtonModule } from 'primeng/button';
     DataTablesModule,
     BrowserAnimationsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    InputNumberModule,
+    PaginatorModule,
+    PanelModule,
+    CardModule,
+    ToolbarModule,
+    InputTextModule
   ],
   declarations: [
     AppComponent,
     FinMontoComponent,
     CtrUsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    FinPagoComponent,
+    FinDeudaPagoComponent
   ],
   providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthInterceptor, multi: true,
+  }, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

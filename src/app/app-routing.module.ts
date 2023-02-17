@@ -4,13 +4,17 @@ import { FinMontoComponent } from 'src/app/Financiero/components/finMonto/finMon
 import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUsuario.component';
 import { LoginComponent } from './Core/Login/components/login.component';
 import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprincipal.component';
+import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
+import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
 
 
 const routes: Routes = [
   { path:'',component: LoginComponent},
   { path:'menu',component: MenuprincipalComponent},
   { path:'montos',component: FinMontoComponent},
-  { path: 'usuarios',component: CtrUsuarioComponent}
+  { path:'cobros',component: FinPagoComponent},
+  { path:'usuarios',component: CtrUsuarioComponent},
+  { path:'cobros/nuevo',component: FinDeudaPagoComponent}
 ];
 
 @NgModule({
