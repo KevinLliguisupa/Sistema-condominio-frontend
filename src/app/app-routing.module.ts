@@ -8,6 +8,7 @@ import { FinTipoServicioComponent } from './Financiero/components/finTipoServici
 import { FinPagoServiciosComponent } from './Financiero/components/finPagoServicios/finPagoServicios.component';
 import { FinIncidenciasComponent } from './Financiero/components/finIncidencias/finIncidencias.component';
 import { FinIncidenciasSolucionadasComponent } from './Financiero/components/finIncidenciasSolucionadas/finIncidenciasSolucionadas.component';
+import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path:'tiposervicio',component:FinTipoServicioComponent},
   {path:'pagoservicio',component:FinPagoServiciosComponent},
   {path:'incidenciasnosolucionadas',component:FinIncidenciasComponent},
-  {path:'incidenciassolucionadas',component:FinIncidenciasSolucionadasComponent}
+  {path:'incidenciassolucionadas',component:FinIncidenciasSolucionadasComponent},
+  {path:'gasto',component:FinGastosComponent}
 ];
 
 @NgModule({

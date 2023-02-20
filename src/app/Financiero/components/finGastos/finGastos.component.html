@@ -1,3 +1,245 @@
-<p>
-  finGastos works!
-</p>
+
+<div class="col-md-8">
+  <div class="card">
+      <div class="card-header"  >
+          <p class="h2 text-center">Administrar pagos para solución de incidencias</p>
+      </div>
+      <div class="card-body">
+          <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+              data-target="#ingresarPagoServicio" >Ingresar pago</button>
+      </div>
+      <div class="modal fade" id="ingresarPagoServicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <p class="modal-title h3" id="exampleModalLabel">Ingresar pago</p>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  
+                  <div class="modal-body">
+                      <form [formGroup]="form">
+                          <div class="form-group">
+                              <label for="inputGroupSelect00">Seleccione el servicio</label>
+                              <select class="form-select" id="inputGroupSelect00" formControlName="txtServicio" >
+                                  <option *ngFor="let ti of serviciosList" value="{{ti.tseId}}">{{ti.tseNombre}}
+                                  </option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="inputGroupSelect01">Seleccione la incidencia</label>
+                        <select class="form-select" id="inputGroupSelect01" formControlName="txtIncidencia" >
+                            <option *ngFor="let ti of incidenciasList" value="{{ti.incId}}">{{ti.incDescripcion}}
+                            </option>
+                    </select>
+                      </div>
+                          <div class="form-group">
+                              <label for="Monto">Ingrese el monto en $</label>
+                              <input type="number" name="Monto" id="Monto" formControlName="txtPago"
+                                  placeholder="Ingresar monto" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="imagen">Suba la imagen del recibo</label>
+                              <input type="file" class="form-control-file" id="imagen" (change)="cargarImagen($event)">
+                            </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary"
+                                  data-dismiss="modal">Cerrar</button>
+                              <button type="button" class="btn btn-primary" (click)="postGasto($event)"
+                                  data-dismiss="modal">Ingresar</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<p-table #dt [value]="gastosList"  dataKey="id" [rowHover]="true"
+[rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" 
+[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+[filterDelay]="0" [globalFilterFields]="['gasId','incId','tseId','gasPago','gasFecha','gasRecibo','gasCedTesorero','gasNomTesorero']">
+<ng-template pTemplate="caption">
+  <div class="table-header text-center h4">
+      Lista de pagos de para solución de incidencias     
+  </div>
+</ng-template>
+<ng-template pTemplate="header">
+  <tr>
+      <th pSortableColumn="gasId">
+          <div class="flex justify-content-between align-items-center text-center">
+              ID
+              <p-sortIcon field="gasId"></p-sortIcon>
+              
+          </div>
+      </th>
+      <th pSortableColumn="incId" >
+        <div class="flex justify-content-between align-items-center text-center" style="min-width: 25rem;">
+            Incidencia
+            <p-sortIcon field="incId"></p-sortIcon>
+           
+        </div>
+    </th>
+      <th pSortableColumn="tseId" >
+        <div class="flex justify-content-between align-items-center text-center">
+            Servicio
+            <p-sortIcon field="tseId"></p-sortIcon>
+           
+        </div>
+    </th>
+    <th pSortableColumn="gasPago" >
+      <div class="flex justify-content-between align-items-center text-center">
+          Monto
+          <p-sortIcon field="gasPago"></p-sortIcon>
+          
+      </div>
+  </th>
+  <th pSortableColumn="gasFecha" >
+    <div class="flex justify-content-between align-items-center text-center">
+        Fecha de pago
+        <p-sortIcon field="gasFecha"></p-sortIcon>
+        
+    </div>
+</th>
+<th pSortableColumn="gasRecibo" >
+  <div class="flex justify-content-between align-items-center text-center">
+      Recibo
+      <p-sortIcon field="gasRecibo"></p-sortIcon>
+      
+  </div>
+</th>
+<th pSortableColumn="gasCedTesorero" >
+  <div class="flex justify-content-between align-items-center text-center">
+      Cédula del tesorero
+      <p-sortIcon field="gasCedTesorero"></p-sortIcon>
+      
+  </div>
+</th>
+<th pSortableColumn="gasNomTesorero" >
+  <div class="flex justify-content-between align-items-center text-center">
+      Nombre del tesorero
+      <p-sortIcon field="gasNomTesorero"></p-sortIcon>
+      
+  </div>
+</th>
+      <th style="width: 5rem" class="text-center">
+        Opciones
+      </th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-gastosModel>
+  <tr class="p-selectable-row">
+      
+      <td>
+         
+          {{gastosModel.gasId}}
+      </td>
+      <td>
+          {{getIncidenciaById(gastosModel.incId)}}
+    </td>
+    <td>
+        {{getServicioById(gastosModel.tseId)}}
+  </td>
+    <td>
+     
+      {{"$"+gastosModel.gasPago}}
+  </td>
+  <td>
+     
+      {{normalizarFecha(gastosModel.gasFecha)}}
+  </td>
+  <td> 
+      <a class="btn btn-success" data-toggle="modal" data-target="#abrirImagenRecibo" (click)="selectImagen(gastosModel.gasRecibo)">
+            Ver recibo
+      </a>
+            
+      <div class="modal fade" id="abrirImagenRecibo" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title h3" id="exampleModalLabel">Recibo</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                    
+                      <img src="{{mostrar()}}" alt="Recibo" style="width: 29rem;">
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+</td>  
+<td>
+    
+  {{gastosModel.gasCedTesorero}}
+</td> 
+<td>
+    
+  {{gastosModel.gasNomTesorero}}
+</td> 
+      <td style="text-align: center">
+
+       
+        <a class="btn btn-success" data-toggle="modal" data-target="#abrirFormularioUpdate"
+        (click)="getDatos(gastosModel.gasId)">
+        <i class="fas fa-edit"></i>Editar
+    </a>
+   
+    <div class="modal fade" id="abrirFormularioUpdate" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title h3" id="exampleModalLabel">Editar imagen del recibo de pago</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <label>
+                                <p class="h4">ID del pago: {{idPago}}</p>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                          <label for="imagenUpdate">Suba la imagen del recibo</label>
+                          <input type="file" class="form-control-file" id="imagenUpdate" (change)="cargarImagen($event)">
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary"
+                                (click)="updateGasto($event)"
+                                data-dismiss="modal">Actualizar</button>
+                        </div>
+                    </form>
+              
+                </div>
+            </div>
+        </div>
+    </div>
+      
+      </td>
+   
+  </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+  <tr>
+      <td colspan="8">No se ha encontrado ningún pago</td>
+  </tr>
+</ng-template>
+</p-table>
