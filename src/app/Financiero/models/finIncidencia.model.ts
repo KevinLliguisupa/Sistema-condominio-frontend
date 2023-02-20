@@ -1,11 +1,12 @@
 export interface FinIncidenciaModel {
-    inc_id:number;
-    usu_cedula:string;
-    inc_fecha_reporte:Date;
-    inc_descripcion:string;
-    inc_evidencia_indicencia:string;
-    inc_solucionada:boolean;
-    inc_fecha_solucion:Date;
-    inc_evidencia_solucion:string;
+    incId:number;
+    usuCedula:string;
+    usuNombre:String;
+    incFechaReporte:Date;
+    incDescripcion:string;
+    incEvidenciaIndicencia:string;
+    incSolucionada:boolean;
+    incFechaSolucion:Date;
+    incEvidenciaSolucion:string;
 
 }
