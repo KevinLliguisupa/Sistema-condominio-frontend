@@ -14,6 +14,10 @@ import { LoginComponent } from './Core/Login/components/login.component';
 
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { FinTipoServicioComponent } from './Financiero/components/finTipoServicio/finTipoServicio.component';
+import { FinPagoServiciosComponent } from './Financiero/components/finPagoServicios/finPagoServicios.component';
+import { FinIncidenciasComponent } from './Financiero/components/finIncidencias/finIncidencias.component';
+import { FinIncidenciasSolucionadasComponent } from './Financiero/components/finIncidenciasSolucionadas/finIncidenciasSolucionadas.component';
 
 @NgModule({
 
@@ -35,7 +39,11 @@ import { ButtonModule } from 'primeng/button';
     AppComponent,
     FinMontoComponent,
     CtrUsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    FinTipoServicioComponent,
+    FinPagoServiciosComponent,
+    FinIncidenciasComponent,
+    FinIncidenciasSolucionadasComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
