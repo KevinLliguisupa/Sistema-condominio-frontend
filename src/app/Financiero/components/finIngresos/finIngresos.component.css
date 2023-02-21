@@ -22,11 +22,11 @@
   .search {
     flex-grow: 1;
     flex-shrink: 1;
-    flex-basis: 50%;
+    flex-basis: 100%;
     padding: 10px;
     box-sizing: border-box;
   }
-  .search {
-    padding-left: 20%;
+  .search{
+    padding-left: 70%;
   }
   

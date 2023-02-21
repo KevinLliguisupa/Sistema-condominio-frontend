@@ -79,5 +79,8 @@ export class FinIncidenciasSolucionadasComponent implements OnInit {
   public mostrarSolucion(){
     return this.incidenciaSolucion;
   }
+  getEventValue($event:any) :string {
+    return $event.target.value;
+  } 
 
 }

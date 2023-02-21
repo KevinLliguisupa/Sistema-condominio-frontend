@@ -18,6 +18,7 @@ public getAllIncidenciasSolucionadas(){
   const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/solucionadas`;
   return this.http.get(url);
 }
+
 public getAllEvidenciaIncidencia(){
   const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/evidenciasnosolucionadas`;
   return this.http.get(url);

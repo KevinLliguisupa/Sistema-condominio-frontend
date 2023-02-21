@@ -19,6 +19,7 @@ import { FinPagoServiciosComponent } from './Financiero/components/finPagoServic
 import { FinIncidenciasComponent } from './Financiero/components/finIncidencias/finIncidencias.component';
 import { FinIncidenciasSolucionadasComponent } from './Financiero/components/finIncidenciasSolucionadas/finIncidenciasSolucionadas.component';
 import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.component';
+import { FinIngresosComponent } from './Financiero/components/finIngresos/finIngresos.component';
 
 @NgModule({
 
@@ -45,7 +46,8 @@ import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.
     FinPagoServiciosComponent,
     FinIncidenciasComponent,
     FinIncidenciasSolucionadasComponent,
-    FinGastosComponent
+    FinGastosComponent,
+    FinIngresosComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true

@@ -82,5 +82,8 @@ export class FinTipoServicioComponent implements OnInit {
     ).subscribe();
 
   }
+  getEventValue($event:any) :string {
+    return $event.target.value;
+  } 
 
 }

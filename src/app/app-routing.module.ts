@@ -9,6 +9,7 @@ import { FinPagoServiciosComponent } from './Financiero/components/finPagoServic
 import { FinIncidenciasComponent } from './Financiero/components/finIncidencias/finIncidencias.component';
 import { FinIncidenciasSolucionadasComponent } from './Financiero/components/finIncidenciasSolucionadas/finIncidenciasSolucionadas.component';
 import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.component';
+import { FinIngresosComponent } from './Financiero/components/finIngresos/finIngresos.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'pagoservicio',component:FinPagoServiciosComponent},
   {path:'incidenciasnosolucionadas',component:FinIncidenciasComponent},
   {path:'incidenciassolucionadas',component:FinIncidenciasSolucionadasComponent},
-  {path:'gasto',component:FinGastosComponent}
+  {path:'gasto',component:FinGastosComponent},
+  {path:'ingresos',component:FinIngresosComponent}
 ];
 
 @NgModule({
