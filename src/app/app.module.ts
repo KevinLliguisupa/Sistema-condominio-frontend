@@ -20,6 +20,9 @@ import { FinIncidenciasComponent } from './Financiero/components/finIncidencias/
 import { FinIncidenciasSolucionadasComponent } from './Financiero/components/finIncidenciasSolucionadas/finIncidenciasSolucionadas.component';
 import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.component';
 import { FinIngresosComponent } from './Financiero/components/finIngresos/finIngresos.component';
+import { FinReporteGeneralComponent } from './Financiero/components/finReporteGeneral/finReporteGeneral.component';
+import { ChartModule } from 'primeng/chart';
+import * as Chart from 'chart.js';
 
 @NgModule({
 
@@ -35,7 +38,8 @@ import { FinIngresosComponent } from './Financiero/components/finIngresos/finIng
     DataTablesModule,
     BrowserAnimationsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ChartModule
   ],
   declarations: [
     AppComponent,
@@ -47,7 +51,8 @@ import { FinIngresosComponent } from './Financiero/components/finIngresos/finIng
     FinIncidenciasComponent,
     FinIncidenciasSolucionadasComponent,
     FinGastosComponent,
-    FinIngresosComponent
+    FinIngresosComponent,
+    FinReporteGeneralComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true

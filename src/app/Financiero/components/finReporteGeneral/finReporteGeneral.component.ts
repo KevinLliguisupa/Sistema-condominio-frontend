@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FinResumenEgresoIncidencias, FinResumenEgresoServicios, FinValorMensual, FinValorTotal } from '../../models/finReporte.model';
+import { FinReporteService } from '../../services/finReporte/finReporte.service';
 
 @Component({
   selector: 'app-finReporteGeneral',
