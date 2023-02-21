@@ -1,0 +1,149 @@
+<h1 class="title">Reporte general</h1>
+<div class="containerMi">
+
+<div class="cardMi1">
+    <div class="cardContent1">
+    <div class="cardHeaderMi">
+    <p class="header-text">Dinero disponible</p>
+    </div>
+    <div class="cardBodyMi">
+        <p class="body-text">{{"$"+dineroDisponible}}</p>
+    </div>
+    </div>
+</div>
+
+<div class="cardMi2">
+ 
+    <div class="cardContent2">
+            <div class="cardHeaderMi">
+            <p class="header-text">Deudas generales</p>
+            </div>
+            <div class="cardBodyMi">
+                <p class="body-text">{{"$"+deudatotal}}</p>
+            </div>
+    </div>
+</div>
+</div>
+
+<div class="card" style="margin-bottom: 5rem;">
+    <p style="text-align: center; margin-top: 1.5rem;" class="h3">Historial de ingresos y egresos (valor en dólares)</p>
+    <p-chart type="bar" [data]="basicData" [options]="horizontalOptions"></p-chart>
+</div>
+
+
+<div style="margin-bottom: 5rem;">
+
+<p-table #dt [value]="egresosIncidenciasResumenTotal"  dataKey="id" [rowHover]="true"
+    [rows]="100" [showCurrentPageReport]="true" [rowsPerPageOptions]="[100,200,500]" 
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['tipoServicio','valor','numIncidencias']">
+    <ng-template pTemplate="caption">
+        <div class="table-header text-center h4">
+            Resumen de egresos para solución de incidencias
+            
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="tipoServicio">
+                <div class="flex justify-content-between align-items-center text-center">
+                    Servicio
+                    <p-sortIcon field="tipoServicio"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="valor" >
+              <div class="flex justify-content-between align-items-center text-center">
+                  Monto
+                  <p-sortIcon field="valor"></p-sortIcon>
+                 
+              </div>
+          </th>
+          <th pSortableColumn="numIncidencias" >
+            <div class="flex justify-content-between align-items-center text-center">
+                Num. incidencias involucradas
+                <p-sortIcon field="numIncidencias"></p-sortIcon>
+                
+            </div>
+        </th>
+        
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-egresosIncidenciasResumenTotal>
+        <tr class="p-selectable-row">
+            
+            <td>
+               
+                {{egresosIncidenciasResumenTotal.tipoServicio}}
+            </td>
+            <td >
+             <p style="padding-left: 20%;"> {{"$"+egresosIncidenciasResumenTotal.valor}}</p>
+              
+          </td>
+          <td>
+           <p style="padding-left: 45%;"> {{egresosIncidenciasResumenTotal.numIncidencias}}</p>
+            
+        </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No hay registros que mostrar</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+
+
+<div style="margin-bottom: 5rem;">
+<p-table #dt [value]="egresosServiciosResumenTotal"  dataKey="id" [rowHover]="true"
+    [rows]="100" [showCurrentPageReport]="true" [rowsPerPageOptions]="[100,200,500]" 
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0" [globalFilterFields]="['tipoServicio','valor','numIncidencias']">
+    <ng-template pTemplate="caption">
+        <div class="table-header text-center h4">
+            Resumen de egresos por pago de servicios
+            
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="tipoServicio">
+                <div class="flex justify-content-between align-items-center text-center">
+                    Servicio
+                    <p-sortIcon field="tipoServicio"></p-sortIcon>
+                    
+                </div>
+            </th>
+            <th pSortableColumn="valor" style="width: 50%;" >
+              <div class="flex justify-content-between align-items-center text-center">
+                  Monto
+                  <p-sortIcon field="valor"></p-sortIcon>
+                 
+              </div>
+          </th>
+        
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-egresosServiciosResumenTotal>
+        <tr class="p-selectable-row">
+            
+            <td style="padding-left: 10%;">
+               
+                {{egresosServiciosResumenTotal.tipoServicio}}
+            </td>
+            <td >
+             <p style="padding-left: 30%;"> {{"$"+egresosServiciosResumenTotal.valor}}</p>
+              
+          </td>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No hay registros que mostrar</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

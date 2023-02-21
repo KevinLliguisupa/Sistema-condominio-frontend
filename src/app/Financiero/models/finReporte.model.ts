@@ -1,4 +1,4 @@
-export interface FinResumenEgresoIncidencias {
+export interface FinResumenEgresoIncidenciasModel {
     anio: number;
     mes: number;
     codigo: number;
@@ -6,7 +6,7 @@ export interface FinResumenEgresoIncidencias {
     valor: number;
     incidencias: number;
 }
-export interface FinResumenEgresoServicios {
+export interface FinResumenEgresoServiciosModel {
     anio: number;
     mes: number;
     codigo: number;
@@ -14,12 +14,29 @@ export interface FinResumenEgresoServicios {
     valor: number;
 }
 
-export interface FinValorMensual {
+export interface FinValorMensualModel {
     anio: number;
     mes: number;
     valor: number;
 }
 
-export interface FinValorTotal {
+export interface FinValorTotalModel {
     valor: number;
+}
+
+export interface FinAnioMesValoresMensualesModel {
+    anioMesNumero: [number, number];
+    anioMesNombre: string;
+    ingesosEgresos: [number,number,number]
+}
+
+export interface FinResumenEgresoIncidenciasTablaModel{
+    tipoServicio:string;
+    valor:number;
+    numIncidencias:number;
+}
+
+export interface FinResumenEgresoServiciosTablaModel {
+    tipoServicio:string;
+    valor:number;
 }

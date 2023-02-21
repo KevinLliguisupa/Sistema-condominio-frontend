@@ -7,12 +7,12 @@ export class FinReporteService {
   @Output() disparador: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
 
-  public getAllResumenEgresosIncidencias(anio:any,mes:any){
-    const url= `http://localhost:8080/web/api/rest/v1/financiero/reporteegresosincidencias/`+anio+`/`+mes;
+  public getAllResumenEgresosIncidencias(){
+    const url= `http://localhost:8080/web/api/rest/v1/financiero/reporteegresosincidencias/0/0`;
     return this.http.get(url);
   }
-  public getAllResumenEgresosServicios(anio:any,mes:any){
-    const url= `http://localhost:8080/web/api/rest/v1/financiero/reporteegresosservicios/`+anio+`/`+mes;
+  public getAllResumenEgresosServicios(){
+    const url= `http://localhost:8080/web/api/rest/v1/financiero/reporteegresosservicios/0/0`;
     return this.http.get(url);
   }
 
@@ -51,4 +51,5 @@ export class FinReporteService {
     const url=`http://localhost:8080/web/api/rest/v1/financiero/deudatotal`;
     return this.http.get(url);
   }
+
 }

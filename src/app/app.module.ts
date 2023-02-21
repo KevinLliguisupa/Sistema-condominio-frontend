@@ -23,7 +23,7 @@ import { FinIngresosComponent } from './Financiero/components/finIngresos/finIng
 import { FinReporteGeneralComponent } from './Financiero/components/finReporteGeneral/finReporteGeneral.component';
 import { ChartModule } from 'primeng/chart';
 import * as Chart from 'chart.js';
-
+import {CardModule} from 'primeng/card';
 @NgModule({
 
   imports: [
@@ -39,7 +39,8 @@ import * as Chart from 'chart.js';
     BrowserAnimationsModule,
     TableModule,
     ButtonModule,
-    ChartModule
+    ChartModule,
+    CardModule
   ],
   declarations: [
     AppComponent,
