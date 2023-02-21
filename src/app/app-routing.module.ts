@@ -6,10 +6,12 @@ import { LoginComponent } from './Core/Login/components/login.component';
 import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprincipal.component';
 import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
 import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
+import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
 
+// { path:'',component: LoginComponent},
 
 const routes: Routes = [
-  { path:'',component: LoginComponent},
+  { path:'',component: FinDeudaComponent},
   { path:'menu',component: MenuprincipalComponent},
   { path:'montos',component: FinMontoComponent},
   { path:'cobros',component: FinPagoComponent},

@@ -15,7 +15,6 @@ export class FinPagoService {
     return this.http.get(this.urlPath + "/recibos?pagination=true&size=" + size + "&page=" + page)
   }
 
-
   public getPagoById(pagoId: number) {
     const endpoint = this.urlPath + '/recibos/' + pagoId
     return this.http.get(endpoint)
@@ -27,5 +26,12 @@ export class FinPagoService {
 
   public postPagarVariasDeudas(body: any) {
     return this.http.post(this.urlPath + "/diferidos", body);
+  }
+
+  public getPagosByInquilino(cedulaInquilino: string, size: number, page: number){
+    const endpoint = this.urlPath + "/recibos/usuario/" + cedulaInquilino +
+    "/?pagination=true&size=" + size + "&page=" + page;
+
+    return this.http.get(endpoint)
   }
 }

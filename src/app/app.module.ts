@@ -27,7 +27,8 @@ import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
 import {InputTextModule} from 'primeng/inputtext';
 import { CurrencyPipe } from '@angular/common';
-
+import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
+import {TabViewModule} from 'primeng/tabview';
 
 @NgModule({
 
@@ -53,7 +54,8 @@ import { CurrencyPipe } from '@angular/common';
     PanelModule,
     CardModule,
     ToolbarModule,
-    InputTextModule
+    InputTextModule,
+    TabViewModule
   ],
   declarations: [
     AppComponent,
@@ -61,7 +63,8 @@ import { CurrencyPipe } from '@angular/common';
     CtrUsuarioComponent,
     LoginComponent,
     FinPagoComponent,
-    FinDeudaPagoComponent
+    FinDeudaPagoComponent,
+    FinDeudaComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, 

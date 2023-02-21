@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-finMonto',
   templateUrl: './finMonto.component.html',
-  styleUrls: ['./finMonto.component.min.css'],
+  styleUrls: ['./finMonto.component.css'],
 
   providers: [ConfirmationService, MessageService]
 })
