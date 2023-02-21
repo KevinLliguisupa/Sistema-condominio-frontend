@@ -1,118 +1,112 @@
-
-
 <div class="container-fluid">
-<div class="row">
 
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Valores a cobrar</h1>
+  </div>
+
+  <div class="row">
+
+    <!-- Multa Actual -->
+    <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                          Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                  </div>
-                  <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                  </div>
-              </div>
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Valor de la cuota mensual:</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{alicuotaActiva.monValor | currency:'USD'}}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
+    </div>
 
-  <!-- Earnings (Annual) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
+    <!-- Alicuota Actual -->
+    <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-danger shadow h-100 py-2">
-          <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                          Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                  </div>
-                  <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                  </div>
-              </div>
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                Valor de multa:</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{multaActiva.monValor | currency:'USD'}}</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 
-
-
-
-  <!-- DataTales Example -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table datatable class="table table-bordered" id="dataTable" width="100%" cellspacing="0" *ngIf="this.temp">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Valor</th>
-              <th>Fecha de creación</th>
-              <th>Fecha de finalización</th>
-              <th>Concepto</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>Id</th>
-              <th>Valor</th>
-              <th>Fecha de creación</th>
-              <th>Fecha de finalización</th>
-              <th>Concepto</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr *ngFor="let monto of this.montos">
-              <td>{{monto.monId}}</td>
-              <td>{{monto.monValor}}</td>
-              <td>{{monto.monFechaAsignacion}}</td>
-              <td>{{monto.monFechaFin}}</td>
-              <td>{{monto.tipoDeuda.tdeNombre}}</td>
-            </tr>
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <button pButton pRipple label="Nuevo Valor" icon="pi pi-plus" class="p-button-success mr-2"
+          style="height: 42px;" (click)="openNew()"></button>
+      </ng-template>
+    </p-toolbar>
 
-          </tbody>
-        </table>
+    <p-table #dt [value]="montos" [rows]="5" [paginator]="true" dataKey="monId" responsiveLayout="stack"
+      [currentPageReportTemplate]="'Página: {currentPage} de {totalPages}'" [showCurrentPageReport]=true
+      [breakpoint]="'700px'" [tableStyle]="{'min-width': '20rem'}" [rowsPerPageOptions]="[5,15,25]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th pSortableColumn="monValor">Valor $<p-sortIcon field="monValor"></p-sortIcon></th>
+          <th pSortableColumn="monFechaAsignacion">Fecha inicio<p-sortIcon field="monFechaAsignacion"></p-sortIcon>
+          </th>
+          <th pSortableColumn="monFechaFin">Fecha fin<p-sortIcon field="monFechaFin"></p-sortIcon>
+          </th>
+          <th pSortableColumn="tipoDeuda.tdeNombre">Concepto<p-sortIcon field="tipoDeuda.tdeNombre"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-monto>
+        <tr>
+          <td>{{monto.monId}}</td>
+          <td>{{monto.monValor | currency:'USD'}}</td>
+          <td>{{monto.monFechaAsignacion}}</td>
+          <td>{{monto.monFechaFin}}</td>
+          <td>{{monto.tipoDeuda.tdeNombre}}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="paginatorleft">
+        Total: {{montos.length}} montos
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog [(visible)]="montoDialog" [style]="{width: '425px', height: '425px'}" header="Nuevo monto a cobrar"
+    [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+      <div class="field">
+        <label for="monValor">Valor ($):</label>
+        <p-inputNumber [(ngModel)]="monto.monValor" id="monValor" mode="currency" currency="USD"
+          locale="en-US"></p-inputNumber>
+        <small class="p-error" *ngIf="submitted && monto.monValor <0.01 ">Debe ingresar un valor mayor a 0</small>
       </div>
-    </div>
 
-  </div>
+      <div class="field">
+        <label for="tipoDeuda">Inventory Status</label>
+        <p-dropdown [options]="tiposDeuda" [(ngModel)]="monto.tipoDeuda" placeholder="Concepto..."
+          optionLabel="tdeNombre"></p-dropdown>
+        <small class="p-error" *ngIf="submitted && !monto.tipoDeuda">Debe seleccionar un concepto</small>
+      </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveMonto()"></button>
+    </ng-template>
+  </p-dialog>
 </div>
-
-    <div class="card">
-      <h5>Implicit Pagination</h5>
-      <p-table [value]="montos" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [tableStyle]="{'min-width': '50rem'}"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
-          <ng-template pTemplate="header">
-              <tr>
-                  <th style="width:25%">Name</th>
-                  <th style="width:25%">Country</th>
-                  <th style="width:25%">Company</th>
-                  <th style="width:25%">Representative</th>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-monto>
-              <tr>
-                  <td>{{monto.monId}}</td>
-                  <td>{{monto.monValor}}</td>
-                  <td>{{monto.monFechaFin}}</td>
-                  <td>{{monto.tipoDeuda.tdeNombre}}</td>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="paginatorleft">
-              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-          </ng-template>
-          <ng-template pTemplate="paginatorright">
-              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-          </ng-template>
-      </p-table>
-  </div>
-
-

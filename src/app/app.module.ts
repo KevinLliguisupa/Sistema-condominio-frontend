@@ -11,6 +11,8 @@ import { AuthInterceptor } from 'src/app/helpers/auth.interceptor';
 import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUsuario.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Core/Login/components/login.component';
+import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
+import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
 
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -22,8 +24,21 @@ import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.
 import { FinIngresosComponent } from './Financiero/components/finIngresos/finIngresos.component';
 import { FinReporteGeneralComponent } from './Financiero/components/finReporteGeneral/finReporteGeneral.component';
 import { ChartModule } from 'primeng/chart';
-import * as Chart from 'chart.js';
 import {CardModule} from 'primeng/card';
+import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {PaginatorModule} from 'primeng/paginator';
+import {PanelModule} from 'primeng/panel';
+import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
+import { CurrencyPipe } from '@angular/common';
+import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
+import {TabViewModule} from 'primeng/tabview';
+import * as Chart from 'chart.js';
+
 @NgModule({
 
   imports: [
@@ -40,7 +55,18 @@ import {CardModule} from 'primeng/card';
     TableModule,
     ButtonModule,
     ChartModule,
-    CardModule
+    CardModule,
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    InputNumberModule,
+    PaginatorModule,
+    PanelModule,
+    CardModule,
+    ToolbarModule,
+    InputTextModule,
+    TabViewModule
   ],
   declarations: [
     AppComponent,
@@ -53,11 +79,15 @@ import {CardModule} from 'primeng/card';
     FinIncidenciasSolucionadasComponent,
     FinGastosComponent,
     FinIngresosComponent,
-    FinReporteGeneralComponent
+    FinReporteGeneralComponent,
+    FinPagoComponent,
+    FinDeudaPagoComponent,
+    FinDeudaComponent
   ],
   providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthInterceptor, multi: true,
+  }, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

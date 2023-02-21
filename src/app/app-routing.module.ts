@@ -11,7 +11,9 @@ import { FinIncidenciasSolucionadasComponent } from './Financiero/components/fin
 import { FinGastosComponent } from './Financiero/components/finGastos/finGastos.component';
 import { FinIngresosComponent } from './Financiero/components/finIngresos/finIngresos.component';
 import { FinReporteGeneralComponent } from './Financiero/components/finReporteGeneral/finReporteGeneral.component';
-
+import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
+import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
+import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
 
 const routes: Routes = [
   { path:'',component: LoginComponent},
@@ -24,7 +26,11 @@ const routes: Routes = [
   {path:'incidenciassolucionadas',component:FinIncidenciasSolucionadasComponent},
   {path:'gasto',component:FinGastosComponent},
   {path:'ingresos',component:FinIngresosComponent},
-  {path:'reportegeneral',component:FinReporteGeneralComponent}
+  {path:'reportegeneral',component:FinReporteGeneralComponent},
+  { path:'cobros',component: FinPagoComponent},
+  { path:'cobros/nuevo',component: FinDeudaPagoComponent},
+  { path:'reporte/inquilino',component: FinDeudaComponent}
+
 ];
 
 @NgModule({
