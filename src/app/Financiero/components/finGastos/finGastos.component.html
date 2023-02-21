@@ -67,9 +67,17 @@
 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 [filterDelay]="0" [globalFilterFields]="['gasId','incId','tseId','gasPago','gasFecha','gasRecibo','gasCedTesorero','gasNomTesorero']">
 <ng-template pTemplate="caption">
+    <div class="containerMi">
   <div class="table-header text-center h4">
-      Lista de pagos de para solución de incidencias     
+      Lista de pagos para solución de incidencias     
   </div>
+  <div class="search">
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input class="form-control boxSearch" p-inputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')" placeholder="Buscar" />
+    </span>
+</div>
+</div>
 </ng-template>
 <ng-template pTemplate="header">
   <tr>

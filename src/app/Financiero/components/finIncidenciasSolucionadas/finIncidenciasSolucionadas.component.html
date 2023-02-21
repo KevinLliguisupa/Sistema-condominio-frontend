@@ -4,9 +4,17 @@
 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 [filterDelay]="0" [globalFilterFields]="['incId','usuCedula','usuNombre','incFechaReporte','incDescripcion']">
 <ng-template pTemplate="caption">
+    <div class="containerMi">
   <div class="table-header text-center h4">
       Lista de incidencias solucionadas   
   </div>
+  <div class="search">
+          <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input class="form-control boxSearch" p-inputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')" placeholder="Buscar" />
+          </span>
+      </div>
+</div>
 </ng-template>
 <ng-template pTemplate="header">
   <tr>
@@ -100,9 +108,10 @@
                     
                       <p>{{incidenciaDescripcion}}</p>
                       <p class="h4">Imágen de la incidencia</p>
-                      <img src="{{mostrarIncidencia()}}" alt="Imagen" style="width: 29rem;">
+                      <img src="{{mostrarIncidencia()}}" alt="Imagen" style="width: 29rem; margin-bottom: 2rem;">
+                     
                       <p class="h4">Imágen de la solución</p>
-                      <img src="{{mostrarSolucion()}}" alt="Imagen" style="width: 29rem;">
+                      <img src="{{mostrarSolucion()}}" alt="Imagen" style="width: 29rem; margin-bottom: 1rem;">
                     </div>
 
 

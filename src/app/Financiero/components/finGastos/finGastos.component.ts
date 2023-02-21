@@ -36,6 +36,7 @@ export class FinGastosComponent implements OnInit {
     private finIncidenciaService:FinIncidenciaService) { }
 
   ngOnInit( ) {
+    this.getAllInidenciasSolucionadas();
     this.getAllTipoServicios();
     this.getAllInidenciasAbiertas();
     this.getAllGastos();
@@ -64,6 +65,17 @@ export class FinGastosComponent implements OnInit {
 
   public getAllInidenciasAbiertas(){
     this.finIncidenciaService.getAllIncidenciasNoSolucionadas().subscribe(
+      (incidencia:any)=>{
+        this.incidenciasList=incidencia;
+        this.incidenciasList.forEach((p)=>{
+          this.incidenciasMap.set(p.incId,p.incDescripcion);
+        });
+        
+      }
+    );
+  }
+  public getAllInidenciasSolucionadas(){
+    this.finIncidenciaService.getAllIncidenciasSolucionadas().subscribe(
       (incidencia:any)=>{
         this.incidenciasList=incidencia;
         this.incidenciasList.forEach((p)=>{
@@ -165,5 +177,8 @@ export class FinGastosComponent implements OnInit {
     }
     
   }
+  getEventValue($event:any) :string {
+    return $event.target.value;
+  } 
   
 }

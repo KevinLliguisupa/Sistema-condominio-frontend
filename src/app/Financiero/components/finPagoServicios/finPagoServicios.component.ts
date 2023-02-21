@@ -154,5 +154,7 @@ export class FinPagoServiciosComponent implements OnInit {
     return fechaFormateada;
 
   }
-
+  getEventValue($event:any) :string {
+    return $event.target.value;
+  } 
 }
