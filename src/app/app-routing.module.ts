@@ -11,12 +11,14 @@ import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.com
 // { path:'',component: LoginComponent},
 
 const routes: Routes = [
-  { path:'',component: FinDeudaComponent},
+  { path:'',component: LoginComponent},
   { path:'menu',component: MenuprincipalComponent},
   { path:'montos',component: FinMontoComponent},
   { path:'cobros',component: FinPagoComponent},
   { path:'usuarios',component: CtrUsuarioComponent},
-  { path:'cobros/nuevo',component: FinDeudaPagoComponent}
+  { path:'cobros/nuevo',component: FinDeudaPagoComponent},
+  { path:'reporte/inquilino',component: FinDeudaComponent}
+
 ];
 
 @NgModule({
