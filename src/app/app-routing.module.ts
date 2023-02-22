@@ -32,7 +32,7 @@ import { FinIngresosGastosMensualesComponent } from './Financiero/components/fin
 
 const routes: Routes = [
   { path:'',component: LoginComponent},
-  { path:'menus',component: MenuprincipalComponent, canActivate:[AuthGuard]},
+  { path:'menu',component: MenuprincipalComponent, canActivate:[AuthGuard]},
   { path:'anuncios',component:CtrAnuncioComponent, canActivate:[AuthGuard]},
   { path:'asignaciones',component:CtrAsignacionComponent, canActivate:[AuthGuard]},
   {path:'casas',component:CtrCasaComponent,canActivate:[AuthGuard]},
