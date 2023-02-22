@@ -30,7 +30,7 @@ export class LoginService {
 
 
   login(creds: Credentials) {
-    return this.http.post('http://localhost:8080/web/api/rest/v1/login', creds, {
+    return this.http.post('http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/login', creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;

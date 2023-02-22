@@ -41,6 +41,18 @@ import * as Chart from 'chart.js';
 import { NavegacionComponent } from './Core/navegacion/navegacion.component';
 import { NoFoundComponent } from './Core/no-found/no-found.component';
 import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprincipal.component';
+import { CtrAnuncioComponent } from './Control/components/ctrAnuncio/ctrAnuncio.component';
+import { CtrAsignacionComponent } from './Control/components/ctrAsignacion/ctrAsignacion.component';
+import { CtrCasaComponent } from './Control/components/ctrCasa/ctrCasa.component';
+import { CtrModuloComponent } from './Control/components/ctrModulo/ctrModulo.component';
+import { CtrPerfilComponent } from './Control/components/ctrPerfil/ctrPerfil.component';
+import { CtrReservacionComponent } from './Control/components/ctrReservacion/ctrReservacion.component';
+import { CtrReunionComponent } from './Control/components/ctrReunion/ctrReunion.component';
+import { CtrTipoAnuncioComponent } from './Control/components/ctrTipoAnuncio/ctrTipoAnuncio.component';
+import { FinEgresosIncidenciasComponent } from './Financiero/components/finEgresosIncidencias/finEgresosIncidencias.component';
+import { FinEgresosServiciosComponent } from './Financiero/components/finEgresosServicios/finEgresosServicios.component';
+import { FinIngresosGastosMensualesComponent } from './Financiero/components/finIngresosGastosMensuales/finIngresosGastosMensuales.component';
+import { FinTipoDeudaComponent } from './Financiero/components/finTipoDeuda/finTipoDeuda.component';
 
 @NgModule({
 
@@ -73,22 +85,34 @@ import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprin
   ],
   declarations: [
     AppComponent,
-    FinMontoComponent,
-    CtrUsuarioComponent,
     LoginComponent,
-    FinTipoServicioComponent,
-    FinPagoServiciosComponent,
+    MenuprincipalComponent,
+    CtrAnuncioComponent,
+    CtrAsignacionComponent,
+    CtrCasaComponent,
+    CtrModuloComponent,
+    CtrPerfilComponent,
+    CtrUsuarioComponent,
+    CtrReservacionComponent,
+    CtrReunionComponent,
+    CtrTipoAnuncioComponent,
+    FinDeudaComponent,
+    FinDeudaPagoComponent,
+    FinEgresosIncidenciasComponent,
+    FinEgresosServiciosComponent,
+    FinGastosComponent,
     FinIncidenciasComponent,
     FinIncidenciasSolucionadasComponent,
-    FinGastosComponent,
     FinIngresosComponent,
-    FinReporteGeneralComponent,
+    FinIngresosGastosMensualesComponent,
+    FinMontoComponent,
     FinPagoComponent,
-    FinDeudaPagoComponent,
-    FinDeudaComponent,
-    NavegacionComponent,
-    NoFoundComponent,
-    MenuprincipalComponent
+    FinPagoServiciosComponent,
+    FinReporteGeneralComponent,
+    FinTipoDeudaComponent,
+    FinTipoServicioComponent,
+    NoFoundComponent
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, 
