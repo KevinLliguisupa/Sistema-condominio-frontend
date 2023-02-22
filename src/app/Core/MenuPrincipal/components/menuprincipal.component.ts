@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../../Login/services/login.service';
 import { Observable } from 'rxjs';
@@ -11,9 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class MenuprincipalComponent implements OnInit {
 
-  constructor() { }
-
-  ) {   }
+  constructor(
+    private router : Router,
+    private rol : LoginService,
+  ) {
+   }
   ngOnInit() {
     console.log(this.rol.getRol());
   }
