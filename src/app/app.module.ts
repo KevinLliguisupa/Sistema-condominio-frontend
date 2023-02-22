@@ -14,7 +14,7 @@ import { LoginComponent } from './Core/Login/components/login.component';
 import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
 import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
 
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { FinTipoServicioComponent } from './Financiero/components/finTipoServicio/finTipoServicio.component';
 import { FinPagoServiciosComponent } from './Financiero/components/finPagoServicios/finPagoServicios.component';
@@ -25,9 +25,7 @@ import { FinIngresosComponent } from './Financiero/components/finIngresos/finIng
 import { FinReporteGeneralComponent } from './Financiero/components/finReporteGeneral/finReporteGeneral.component';
 import { ChartModule } from 'primeng/chart';
 import {CardModule} from 'primeng/card';
-import {ToastModule} from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {PaginatorModule} from 'primeng/paginator';
@@ -41,6 +39,16 @@ import * as Chart from 'chart.js';
 import { NavegacionComponent } from './Core/navegacion/navegacion.component';
 import { NoFoundComponent } from './Core/no-found/no-found.component';
 import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprincipal.component';
+import { CtrAnuncioComponent } from './Control/components/ctrAnuncio/ctrAnuncio.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastModule } from 'primeng/toast';
+import { CtrTipoAnuncioComponent } from './Control/components/ctrTipoAnuncio/ctrTipoAnuncio.component';
+import { CtrLugarComponent } from './Control/components/ctrLugar/ctrLugar.component';
+import { CtrReunionComponent } from './Control/components/ctrReunion/ctrReunion.component';
+import { CtrReservacionComponent } from './Control/components/ctrReservacion/ctrReservacion.component';
 
 @NgModule({
 
@@ -51,8 +59,6 @@ import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprin
     HttpClientModule,
     CommonModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     DataTablesModule,
     BrowserAnimationsModule,
     TableModule,
@@ -69,7 +75,11 @@ import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprin
     CardModule,
     ToolbarModule,
     InputTextModule,
-    TabViewModule
+    TabViewModule,
+    ConfirmDialogModule,
+    MessagesModule,
+    NgbModule,
+    ToastModule
   ],
   declarations: [
     AppComponent,
@@ -88,12 +98,17 @@ import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprin
     FinDeudaComponent,
     NavegacionComponent,
     NoFoundComponent,
-    MenuprincipalComponent
+    MenuprincipalComponent,
+    CtrAnuncioComponent,
+    CtrTipoAnuncioComponent,
+    CtrLugarComponent,
+    CtrReunionComponent,
+    CtrReservacionComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor, multi: true,
-  }, CurrencyPipe],
+  }, CurrencyPipe, ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

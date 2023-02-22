@@ -1,3 +1,80 @@
-<p>
-  ctrReunion works!
-</p>
+<div class="container-fluid">
+  <div class="row " style="margin-top: 50px;">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de reuniones</h6>
+        <button type="button" class="btn btn-primary" (click)="openAddModal()">
+          Agregar
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table datatable class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let reunion of reuniones">
+                <td>{{reunion.reuId}}</td>
+                <td>{{reunion.reuFecha}}</td>
+                <td>{{reunion.lugId.lugNombre}}</td>
+                <td>
+                  <button (click)="openEditModal(reunion)" style="width: 25px; height: 35px; margin-right: 8px;"
+                    class="p-button-info p-button-rounded p-button-outlined p-button-sm" pButton type="button"
+                    icon="pi pi-file-edit" iconPos="left"></button>
+                  <button (click)="delete(reunion.reuId)" style="width: 25px; height: 35px;"
+                    class="p-button-danger p-button-rounded p-button-outlined p-button-sm" pButton type="button"
+                    icon="pi pi-times" iconPos="left"></button>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!isEdit; else editBlock" class="modal-title fs-5">Agregar</h1>
+          <ng-template #editBlock>
+            <h1 class="modal-title fs-5">Editar</h1>
+          </ng-template>
+          <button type="button" class="btn-close" (click)="onCloseHandled()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" class="form-control" id="fecha" placeholder="Titulo" [(ngModel)]="newReunion.reuFecha">
+            <small *ngIf="errors.reuFecha" class="form-text text-danger">{{errors.reuFecha}} </small>
+          </div>
+          <div class="form-group">
+            <label for="tipoAnuncio">Tipo de reunion</label>
+            <select id="tipoAnuncio" class="form-control custom-select" [(ngModel)]="newReunion.lugId">
+              <option *ngFor="let option of lugares" [value]="option.lugId">
+                {{option.lugNombre}}
+              </option>
+            </select>
+            <small *ngIf="errors.lugId" class="form-text text-danger">{{errors.lugId}} </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="onSave()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <p-confirmDialog></p-confirmDialog>
+    <p-toast position="bottom-right"></p-toast>
+  </div>
