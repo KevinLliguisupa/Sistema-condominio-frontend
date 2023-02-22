@@ -1,3 +1,281 @@
-<p>
-  finIncidencias works!
-</p>
+<app-navegacion></app-navegacion>
+<div class="content-body">
+    <div class="row page-titles mx-0">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <p class="h2 text-center">Administrar Incidencias</p>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#ingresarIncidencia">Ingresar incidencia</button>
+                </div>
+                <div class="modal fade" id="ingresarIncidencia" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title h3" id="exampleModalLabel">Ingresar incidencia</p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form [formGroup]="form">
+
+                                    <div class="form-group">
+
+                                        <textarea type="text" name="Descripcion" id="Descripcion"
+                                            formControlName="txtDescripcion" placeholder="Ingresar la descripción"
+                                            class="form-control" rows="4"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="imagen">Subir una imagen de evidencia</label>
+                                        <input type="file" class="form-control-file" id="imagen"
+                                            (change)="cargarImagen($event)">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" (click)="postIncidencia($event)"
+                                            data-dismiss="modal">Ingresar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <p-table #dt [value]="incidenciasNoSolucionadasList" dataKey="id" [rowHover]="true" [rows]="10"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['incId','usuCedula','usuNombre','incFechaReporte','incDescripcion','incEvidenciaIndicencia']">
+            <ng-template pTemplate="caption">
+                <div class="containerMi">
+                    <div class="table-header h4">
+                        Lista de incidencias sin solucionar
+                    </div>
+                    <div class="search">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input class="form-control boxSearch" p-inputText type="text"
+                                (input)="dt.filterGlobal(getEventValue($event), 'contains')" placeholder="Buscar" />
+                        </span>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="incId">
+                        <div class="flex justify-content-between align-items-center text-center">
+                            ID
+                            <p-sortIcon field="incId"></p-sortIcon>
+
+                        </div>
+                    </th>
+                    <th pSortableColumn="usuCedula">
+                        <div class="flex justify-content-between align-items-center text-center">
+                            Cédula del presidente
+                            <p-sortIcon field="usuCedula"></p-sortIcon>
+
+                        </div>
+                    </th>
+                    <th pSortableColumn="usuNombre">
+                        <div class="flex justify-content-between align-items-center text-center">
+                            Nombre del presidente
+                            <p-sortIcon field="usuNombre"></p-sortIcon>
+
+                        </div>
+                    </th>
+                    <th pSortableColumn="incFechaReporte">
+                        <div class="flex justify-content-between align-items-center text-center">
+                            Fecha de reporte
+                            <p-sortIcon field="incFechaReporte"></p-sortIcon>
+
+                        </div>
+                    </th>
+                    <th pSortableColumn="incDescripcion">
+                        <div class="flex justify-content-between align-items-center text-center">
+                            Detalle
+                            <p-sortIcon field="incDescripcion"></p-sortIcon>
+
+                        </div>
+                    </th>
+                    <th style="width: 5rem" class="text-center">
+                        Editar
+                    </th>
+                    <th style="width: 5rem" class="text-center">
+                        Solucionar
+                    </th>
+                </tr>
+
+            </ng-template>
+
+
+            <ng-template pTemplate="body" let-incidenciasNoSolucionadasList>
+                <tr class="p-selectable-row">
+
+                    <td>
+
+                        {{incidenciasNoSolucionadasList.incId}}
+                    </td>
+                    <td>
+                        {{incidenciasNoSolucionadasList.usuCedula}}
+                    </td>
+                    <td>
+                        {{incidenciasNoSolucionadasList.usuNombre}}
+                    </td>
+
+                    <td>
+
+                        {{normalizarFecha(incidenciasNoSolucionadasList.incFechaReporte)}}
+                    </td>
+                    <td>
+
+                        <a class="btn btn-success" data-toggle="modal" data-target="#abrirDescripcion"
+                            (click)="selectDescripcion(incidenciasNoSolucionadasList.incDescripcion,incidenciasNoSolucionadasList.incEvidenciaIndicencia)">
+                            Ver detalle
+                        </a>
+
+                        <div class="modal fade" id="abrirDescripcion" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title h3" id="exampleModalLabel">Detalle de la incidencia</p>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body ">
+
+                                        <p>{{descripcionMostrar}}</p>
+                                        <p class="h4">Imágen de la incidencia</p>
+                                        <img src="{{mostrar()}}" alt="Imagen" style="width: 29rem;">
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td style="text-align: center">
+
+                        <a class="btn btn-success" data-toggle="modal" data-target="#abrirFormularioUpdate"
+                            (click)="getIdIncidencia(incidenciasNoSolucionadasList.incId,incidenciasNoSolucionadasList.incEvidenciaIndicencia,incidenciasNoSolucionadasList.incDescripcion)">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+
+
+                        <div class="modal fade" id="abrirFormularioUpdate" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title h3" id="exampleModalLabel">Editar incidencia</p>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form [formGroup]="form">
+                                            <div class="form-group">
+                                                <label>
+                                                    <p class="h4">ID de la incidencia: {{idIncidencia}}</p>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="DescripcionUpdate">Ingresar la descripción</label>
+                                                <textarea type="text" name="DescripcionUpdate" id="DescripcionUpdate"
+                                                    formControlName="txtDescripcion"
+                                                    placeholder="Ingresar la descripción" class="form-control"
+                                                    value="{{descripcionMostrar}}" rows="4"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="imagenUpdate">Selecciona una imagen</label>
+                                                <input type="file" class="form-control-file" id="imagenUpdate"
+                                                    (change)="cargarImagen($event)">
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="putIncidencia($event)"
+                                                    data-dismiss="modal">Actualizar</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td style="text-align: center">
+
+                        <a class="btn btn-success" data-toggle="modal" data-target="#abrirFormularioSolucion"
+                            (click)="getIdIncidencia(incidenciasNoSolucionadasList.incId,incidenciasNoSolucionadasList.incEvidenciaIndicencia,incidenciasNoSolucionadasList.incDescripcion)">
+                            <i class="fas fa-check"></i> Solucionar
+                        </a>
+                        <div class="modal fade" id="abrirFormularioSolucion" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title h3" id="exampleModalLabel">Formulario para solución de
+                                            incidencia</p>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form [formGroup]="form">
+                                            <div class="form-group">
+                                                <label>
+                                                    <p class="h4">ID de la incidencia: {{idIncidencia}}</p>
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="imagenUpdate" class="h5">Suba una imagen de la solución de
+                                                    la incidencia</label>
+                                                <input type="file" class="form-control-file" id="imagenUpdate"
+                                                    (change)="cargarImagen($event)">
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="putIncidenciaSolucion($event)"
+                                                    data-dismiss="modal">Solucionar</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8">No se ha encontrado ninguna incidencia</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

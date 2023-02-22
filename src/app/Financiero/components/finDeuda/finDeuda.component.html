@@ -1,3 +1,243 @@
-<p>
-  finDeuda works!
-</p>
+<app-navegacion></app-navegacion>
+<div class="content-body">
+  <div class="row page-titles mx-0">
+    <div class="container-fluid">
+      <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Pagos y deudas</h1>
+      </div>
+
+      <div class="row">
+        <!-- Deuda Actual -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                    Deuda actual a pagar:</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">{{valorAdeudado | currency:'USD'}}</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proximo Recargo -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    Proximo recargo ({{proximaDeuda.monto.tipoDeuda.tdeNombre}}):</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                    {{proximaDeuda.monto.monValor | currency:'USD' }}
+                    ({{proximaDeuda.fecha | date}})
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p-tabView styleClass="tabview-custom">
+          <p-tabPanel>
+            <ng-template pTemplate="header">
+              <i class="pi pi-book"></i>
+              <span style="padding-left: 10px;">Alícuotas</span>
+            </ng-template>
+
+            <div class="card shadow mb-4">
+              <p-table #dt [value]="deudasConsultadas" [lazy]="true" (onLazyLoad)="nextPageDeudas($event)"
+                [paginator]="true" dataKey="pagId" [rows]="deudasSize" [totalRecords]="totalRecords" [loading]="loading"
+                [rowsPerPageOptions]="[6,15,25,50]"
+                [currentPageReportTemplate]="'Página: {currentPage} de {totalPages}'" [showCurrentPageReport]=true
+                responsiveLayout="stack" [breakpoint]="'700px'" [tableStyle]="{'min-width': '20rem'}">
+
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Deuda</th>
+                    <th style="width: 225px;" pSortableColumn="deuFechaCorte">Fecha corte<p-sortIcon
+                        field="deuFechaCorte"></p-sortIcon></th>
+                    <th>Concepto</th>
+                    <th pSortableColumn="depValorPagado">Valor<p-sortIcon field="depValorPagado"></p-sortIcon></th>
+                    <th>Saldo</th>
+
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-deuda>
+                  <tr style="height: 61px;">
+                    <td>{{deuda.deuId}}</td>
+                    <td style="width: 225px;">{{deuda.deuFechaCorte | date}}</td>
+                    <td>{{deuda.monto.tipoDeuda.tdeNombre}}</td>
+                    <td>{{deuda.monto.monValor | currency:'USD'}}</td>
+                    <td>{{deuda.deuSaldoView}}</td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                  Total: {{totalRecords}} deudas
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <h4>
+                    No data found
+                  </h4>
+                </ng-template>
+              </p-table>
+
+            </div>
+
+          </p-tabPanel>
+          <p-tabPanel header="Header II">
+            <ng-template pTemplate="header">
+              <i class="pi pi-paypal"></i>
+              <span style="padding-left: 10px;">Pagos</span>
+            </ng-template>
+
+            <div class="card shadow mb-4">
+              <p-table #dt [value]="pagosRealizados" [lazy]="true" (onLazyLoad)="nextPage($event)" [paginator]="true"
+                dataKey="pagId" [rows]="size" [totalRecords]="totalRecords" [loading]="loading"
+                [rowsPerPageOptions]="[5,15,25,50]"
+                [currentPageReportTemplate]="'Página: {currentPage} de {totalPages}'" [showCurrentPageReport]=true
+                responsiveLayout="stack" [breakpoint]="'700px'" [tableStyle]="{'min-width': '20rem'}">
+
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Pago</th>
+                    <th>C.I. Inquilino</th>
+                    <th>Apellidos Inquilino</th>
+                    <th>Fecha Cobro</th>
+                    <th>Valor ($)</th>
+                    <th>Opciones</th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-pago>
+                  <tr>
+                    <td>{{pago.pagId}}</td>
+                    <td>{{pago.usuCedula}}</td>
+                    <td>{{pago.usuApellidos}}</td>
+                    <td>{{pago.pagFecha}}</td>
+                    <td>{{pago.pagValor | currency:'USD'}}</td>
+                    <td>
+                      <button pButton pRipple type="button" (click)="openDialog(pago.pagId)" icon="pi pi-eye"
+                        label="Info" class="p-button-rounded p-button-secondary" style="height: 40px;"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                  Total: {{totalRecords}} pagos
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                </ng-template>
+              </p-table>
+            </div>
+
+            <p-dialog [(visible)]="detallesDialog" [style]="{width: '1000px'}" header="Información del pago"
+              [maximizable]="true" [modal]="true" styleClass="p-fluid" [breakpoints]="{'960px': '75vw'}"
+              [draggable]="false" [resizable]="false">
+              <ng-template pTemplate="content">
+                <div class="card shadow mb-4">
+                  <p-card [style]="{'height': '220px'}">
+
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                      <div style="width: 200px;">
+                        <h1>Pago Nro: </h1>
+                        <div>
+                          <h2><b>{{pagoDetalle.pagId}}</b></h2>
+                        </div>
+                        <br>
+                        <br>
+                      </div>
+                      <div style="width: 400px;">
+                        <h1>Información del inquilino</h1>
+                        <div>
+                          <b>Cedula Inquilino: </b>
+                          <label for="basic">{{pagoDetalle.usuCedula}}</label>
+                        </div>
+                        <div>
+                          <b>Nombre: </b>
+                          <label for="dateformat">{{pagoDetalle.usuApellidos}} {{pagoDetalle.usuNombres}}</label>
+                        </div>
+                        <div>
+                          <b>Correo: </b>
+                          <label for="icon">{{pagoDetalle.usuCorreo}}</label>
+                        </div>
+                      </div>
+                      <div style="width: 300px;">
+                        <h1>Información del pago</h1>
+                        <div>
+                          <b>Fecha de pago: </b>
+                          <label for="basic"> {{pagoDetalle.pagFecha}}</label>
+                        </div>
+
+                        <div>
+                          <b>Total pagado: </b>
+                          <label for="dateformat">{{pagoDetalle.pagValor| currency:'USD'}}</label>
+                        </div>
+
+                        <div>
+                          <b>Tesorero: </b>
+                          <label for="icon">{{pagoDetalle.cedTesorero}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </p-card>
+                </div>
+
+                <div class="card shadow mb-4">
+                  <p-table [value]="pagoDetalle.detalles" responsiveLayout="scroll" [paginator]="true" [rows]="3"
+                    [responsive]="true">
+                    <ng-template pTemplate="caption">
+                      Deudas pagadas
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th>Deuda</th>
+                        <th pSortableColumn="deuFechaCorte">Fecha corte<p-sortIcon field="deuFechaCorte"></p-sortIcon>
+                        </th>
+                        <th>Concepto</th>
+                        <th>Adeudado</th>
+                        <th pSortableColumn="depValorPagado">Pagado<p-sortIcon field="depValorPagado"></p-sortIcon></th>
+                        <th pSortableColumn="recSaldo">Saldo<p-sortIcon field="recSaldo"></p-sortIcon></th>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-detalle>
+                      <tr>
+                        <td>{{detalle.deuId}}</td>
+                        <td>{{detalle.deuFechaCorte}}</td>
+                        <td>{{detalle.tdeNombre}}</td>
+                        <td>{{detalle.recValorAdeudado| currency:'USD'}}</td>
+                        <td>{{detalle.depValorPagado| currency:'USD'}}</td>
+                        <td>{{detalle.recSaldo| currency:'USD'}}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <button pButton pRipple label="Cerrar" icon="pi pi-times" class="p-button-text"
+                  (click)="hideDialog()"></button>
+              </ng-template>
+            </p-dialog>
+
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

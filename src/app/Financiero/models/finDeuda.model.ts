@@ -1,9 +1,12 @@
-export interface FinDeudaModel {
-    deu_id:number;
-    deu_fecha_corte:Date;
-    deu_saldo:number;
-    deu_cancelado:boolean;
-    mon_id:number;
-    usu_cedula:string;
+import { FinMontModel } from "./finMonto.model";
 
+export interface FinDeudaModel {
+    deuId: number;
+    usuCedula: string;
+    deuFechaCorte: Date;
+    deuSaldo: number;
+    deuCancelado: boolean;
+    deuSaldoView?: string;
+    deuPagoActivo?: boolean;
+    monto:FinMontModel;
 }

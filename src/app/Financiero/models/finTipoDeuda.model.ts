@@ -1,4 +1,4 @@
 export interface FinTipoDeudaModel {
-    tdeId:number;
-    tdeNombre:string;
+    tdeId?:number;
+    tdeNombre?:string;
 }

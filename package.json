@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.11.6",
     "angular-datatables": "^15.0.0",
     "bootstrap": "^4.6.2",
+    "chart.js": "^4.2.1",
     "datatables.net": "^1.13.2",
     "datatables.net-bs4": "^1.13.2",
     "jquery": "^3.6.3",
@@ -32,6 +33,7 @@
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.7.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

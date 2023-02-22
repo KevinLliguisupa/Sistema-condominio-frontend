@@ -1,3 +1,206 @@
-<p>
-  finDeudaPago works!
-</p>
+<app-navegacion></app-navegacion>
+<div class="content-body">
+  <div class="row page-titles mx-0">
+
+    <div class="container-fluid">
+
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Cobrar deuda</h1>
+      </div>
+
+
+      <div class="card shadow mb-4">
+
+
+        <p-toolbar styleClass="mb-4 gap-2">
+          <ng-template pTemplate="left">
+            <div class="input-group">
+              <div class="d-flex align-items-center" style="padding-right: 10px;">
+                <label class="m-0" style="font-size: 18px;" for="ciInquilino">Cédula del inquilino:</label>
+              </div>
+              <input id="ciInquilino" pInputText [(ngModel)]="inquilinoBuscado" type="text" placeholder="Search..."
+                style="height: 40px; width: 300px;" />
+              <div class="input-group-append">
+                <button (click)="buscarInquilino()" class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="right">
+
+          </ng-template>
+        </p-toolbar>
+
+        <p-table #dt [value]="dudasConsultadas" [lazy]="true" (onLazyLoad)="nextPage($event)" [paginator]="true"
+          dataKey="pagId" [rows]="size" [totalRecords]="totalRecords" [loading]="loading"
+          [rowsPerPageOptions]="[5,15,25,50]" [currentPageReportTemplate]="'Página: {currentPage} de {totalPages}'"
+          [showCurrentPageReport]=true responsiveLayout="stack" [breakpoint]="'700px'"
+          [tableStyle]="{'min-width': '20rem'}">
+
+          <ng-template pTemplate="caption">
+            <div class="d-flex align-items-center justify-content-between">
+              <h2 class="m-0" style="font-size: 18px;"> Deudas pendientes</h2>
+              <span class="p-input-icon-left;" style="padding-right: 15px;">
+                <button pButton pRipple label="Cobrar diferido" icon="pi pi-wallet" class="p-button-warning mr-2"
+                  style="height: 40px;" [hidden]="!pagarVariasActive" (click)="openPagarVarias()"></button>
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Deuda</th>
+              <th style="width: 225px;" pSortableColumn="deuFechaCorte">Fecha corte<p-sortIcon
+                  field="deuFechaCorte"></p-sortIcon></th>
+              <th>Concepto</th>
+              <th pSortableColumn="depValorPagado">Valor<p-sortIcon field="depValorPagado"></p-sortIcon></th>
+              <th>Saldo</th>
+              <th style="width: 200px;">Opciones</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-deuda>
+            <tr>
+              <td>{{deuda.deuId}}</td>
+              <td style="width: 225px;">{{deuda.deuFechaCorte | date}}</td>
+              <td>{{deuda.monto.tipoDeuda.tdeNombre}}</td>
+              <td>{{deuda.monto.monValor | currency:'USD'}}</td>
+              <td>{{deuda.deuSaldo | currency:'USD'}}</td>
+              <td style="width: 200px;">
+                <button pButton pRipple type="button" icon="pi pi-dollar" label="Cobrar" style="height: 40px;"
+                  class="p-button-rounded p-button-success" [hidden]="!deuda.deuPagoActivo"
+                  (click)="cobrarUnaDeuda(deuda)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="paginatorleft">
+            Total: {{totalRecords}} deudas
+          </ng-template>
+          <ng-template pTemplate="paginatorright">
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <h4>
+              No data found
+            </h4>
+          </ng-template>
+        </p-table>
+
+      </div>
+
+
+      <p-dialog [(visible)]="detallesDialog" [style]="{width: '1000px'}" header="Información del pago"
+        [maximizable]="true" [modal]="true" styleClass="p-fluid" [breakpoints]="{'960px': '75vw'}" [draggable]="false"
+        [resizable]="false">
+        <ng-template pTemplate="content">
+          <div class="card shadow mb-4">
+            <p-card [style]="{'height': '220px'}">
+
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div style="width: 200px;">
+                  <h1>Pago Nro: </h1>
+                  <div>
+                    <h2><b>{{detallesPago.pagId}}</b></h2>
+                  </div>
+                  <br>
+                  <br>
+                </div>
+                <div style="width: 400px;">
+                  <h1>Información del inquilino</h1>
+                  <div>
+                    <b>Cedula Inquilino: </b>
+                    <label for="basic">{{detallesPago.usuCedula}}</label>
+                  </div>
+                  <div>
+                    <b>Nombre: </b>
+                    <label for="dateformat">{{detallesPago.usuApellidos}} {{detallesPago.usuNombres}}</label>
+                  </div>
+                  <div>
+                    <b>Correo: </b>
+                    <label for="icon">{{detallesPago.usuCorreo}}</label>
+                  </div>
+                </div>
+                <div style="width: 300px;">
+                  <h1>Información del pago</h1>
+                  <div>
+                    <b>Fecha de pago: </b>
+                    <label for="basic"> {{detallesPago.pagFecha}}</label>
+                  </div>
+
+                  <div>
+                    <b>Total pagado: </b>
+                    <label for="dateformat">{{detallesPago.pagValor| currency:'USD'}}</label>
+                  </div>
+
+                  <div>
+                    <b>Tesorero: </b>
+                    <label for="icon">{{detallesPago.cedTesorero}}</label>
+                  </div>
+                </div>
+              </div>
+            </p-card>
+          </div>
+
+
+          <div class="card shadow mb-4">
+            <p-table [value]="detallesPago.detalles" responsiveLayout="scroll" [paginator]="true" [rows]="3"
+              [responsive]="true">
+              <ng-template pTemplate="caption">
+                Deudas pagadas
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Deuda</th>
+                  <th pSortableColumn="deuFechaCorte">Fecha corte<p-sortIcon field="deuFechaCorte"></p-sortIcon></th>
+                  <th>Concepto</th>
+                  <th>Adeudado</th>
+                  <th pSortableColumn="depValorPagado">Pagado<p-sortIcon field="depValorPagado"></p-sortIcon></th>
+                  <th pSortableColumn="recSaldo">Saldo<p-sortIcon field="recSaldo"></p-sortIcon></th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-detalle>
+                <tr>
+                  <td>{{detalle.deuId}}</td>
+                  <td>{{detalle.deuFechaCorte}}</td>
+                  <td>{{detalle.tdeNombre}}</td>
+                  <td>{{detalle.recValorAdeudado| currency:'USD'}}</td>
+                  <td>{{detalle.depValorPagado| currency:'USD'}}</td>
+                  <td>{{detalle.recSaldo| currency:'USD'}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cerrar" icon="pi pi-times" class="p-button-text"
+            (click)="hideDialog()"></button>
+        </ng-template>
+      </p-dialog>
+
+
+      <p-dialog [(visible)]="pagarVariasDialog" [style]="{width: '425px', height: '290px'}" header="Pagar Varias deudas"
+        [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+
+          <div class="field">
+            <label for="valorPagar">Valor a pagar ($):</label>
+            <p-inputNumber [(ngModel)]="pago.pagValor" id="valorPagar" mode="currency" currency="USD"
+              locale="en-US"></p-inputNumber>
+            <small class="p-error" *ngIf="submitted && pago.pagValor <0.01 ">Debe ingresar un valor mayor a 0</small>
+          </div>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="hidePagarVariasDialog()"></button>
+          <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            (click)="pagarVariasDeudas()"></button>
+        </ng-template>
+      </p-dialog>
+
+    </div>
+  </div>
+</div>
