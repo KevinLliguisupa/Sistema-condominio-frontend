@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
   providedIn: 'root'
 })
 export class FinTipoDeudaService {
-  urlPath:string="http://localhost:8080/web/api/rest/v1/financiero/cobros/tipos-deuda";
+  urlPath:string="http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/cobros/tipos-deuda";
 
 
 constructor(private http:HttpClient) { }
