@@ -14,6 +14,7 @@ import { FinReporteGeneralComponent } from './Financiero/components/finReporteGe
 import { FinPagoComponent } from './Financiero/components/finPago/finPago.component';
 import { FinDeudaPagoComponent } from './Financiero/components/finDeudaPago/finDeudaPago.component';
 import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
+import { NoFoundComponent } from './Core/no-found/no-found.component';
 
 const routes: Routes = [
   { path:'',component: LoginComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'reportegeneral',component:FinReporteGeneralComponent},
   { path:'cobros',component: FinPagoComponent},
   { path:'cobros/nuevo',component: FinDeudaPagoComponent},
-  { path:'reporte/inquilino',component: FinDeudaComponent}
+  { path:'reporte/inquilino',component: FinDeudaComponent},
+  { path:'**',component: NoFoundComponent}
 
 ];
 

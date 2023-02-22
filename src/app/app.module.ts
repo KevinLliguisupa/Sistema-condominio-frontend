@@ -38,6 +38,9 @@ import { CurrencyPipe } from '@angular/common';
 import { FinDeudaComponent } from './Financiero/components/finDeuda/finDeuda.component';
 import {TabViewModule} from 'primeng/tabview';
 import * as Chart from 'chart.js';
+import { NavegacionComponent } from './Core/navegacion/navegacion.component';
+import { NoFoundComponent } from './Core/no-found/no-found.component';
+import { MenuprincipalComponent } from './Core/MenuPrincipal/components/menuprincipal.component';
 
 @NgModule({
 
@@ -82,7 +85,10 @@ import * as Chart from 'chart.js';
     FinReporteGeneralComponent,
     FinPagoComponent,
     FinDeudaPagoComponent,
-    FinDeudaComponent
+    FinDeudaComponent,
+    NavegacionComponent,
+    NoFoundComponent,
+    MenuprincipalComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, 
