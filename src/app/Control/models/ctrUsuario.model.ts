@@ -5,10 +5,22 @@ export interface CtrUsuarioModel {
     usuCorreo:string;
     usuTelefono:string;
     usuClave:string;
+    usuRol:string;
     usuEstado:boolean;
 }
 
 export interface Credentials{
   usuCedula: string;
   usuClave: string;
+}
+export interface CredentialsRol extends Credentials{
+  usuRol: string;
+
+}
+
+export interface objectL{
+  sub: string,
+  exp: number,
+  usuNombres: string,
+  usuRol: string
 }

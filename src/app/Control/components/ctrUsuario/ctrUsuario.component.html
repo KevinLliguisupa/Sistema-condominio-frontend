@@ -5,7 +5,7 @@
         <tr>
             <th>ID</th>
             <th>NOMBRE</th>
-            <th>Apellidos</th>
+            <th>APELLIDOS</th>
             <th>CELULAR</th>
             <th>EMAIL</th>
         </tr>
@@ -14,9 +14,9 @@
         <tr *ngFor="let usuario of usuarios">
             <td>{{usuario.usuCedula}} </td>
             <td>{{usuario.usuApellidos}}</td>
-            <td>{{usuario.usuNombres }} <td>
+            <td>{{usuario.usuNombres}}<td>
+            <td>{{usuario.usuTelefono}}</td>
             <td>{{usuario.usuCorreo }}</td>
-            <td>{{usuario.usuTelefono }} </td>
         </tr>
     </tbody>
   </table>

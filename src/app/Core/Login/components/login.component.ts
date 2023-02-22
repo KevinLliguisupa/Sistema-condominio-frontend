@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   creds: Credentials = {
     usuCedula: "",
     usuClave: ""
-   };
+  };
 
 
   constructor(
