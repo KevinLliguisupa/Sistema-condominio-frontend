@@ -9,7 +9,7 @@ import { CtrLugarModel, CtrLugarModelSave } from '../../models/ctrLugar.model';
 export class CtrLugarService {
 
 
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/control/lugar";
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/lugar";
 
   constructor(private http: HttpClient) { }
 

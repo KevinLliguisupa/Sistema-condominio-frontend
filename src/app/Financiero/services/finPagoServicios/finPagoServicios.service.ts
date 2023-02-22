@@ -14,12 +14,12 @@ constructor(private http: HttpClient) { }
 
 
 public getAllPagosServicios(){
-  const url="http://localhost:8080/web/api/rest/v1/financiero/pagoservicios";
+  const url="http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/pagoservicios";
   return this.http.get(url);
 }
 
 public getAllImagenes(){
-  const url="http://localhost:8080/web/api/rest/v1/financiero/pagoservicios/imagenrecibo";
+  const url="http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/pagoservicios/imagenrecibo";
   return this.http.get(url);
 }
 
@@ -37,7 +37,7 @@ public postPagoServicio(pagoServicioModel: any){
           pseRecibo:base64,
           pseCedTesorero:pagoServicioModel.pseCedTesorero 
         }
-         return this.http.post<string>(`http://localhost:8080/web/api/rest/v1/financiero/pagoservicios`, pagoServicioModelInsert);
+         return this.http.post<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/pagoservicios`, pagoServicioModelInsert);
       })
   );
 }
@@ -54,7 +54,7 @@ public putPagoServicio(pagoServicioModel: any, id:any,verificarImagen:boolean){
           var pagoServicioModelUpdate={
             pseRecibo:base64,
           }
-           return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/pagoservicios/`+id, pagoServicioModelUpdate);
+           return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/pagoservicios/`+id, pagoServicioModelUpdate);
         })
     );
   }else{
@@ -62,7 +62,7 @@ public putPagoServicio(pagoServicioModel: any, id:any,verificarImagen:boolean){
           var pagoServicioModelUpdate={
             pseRecibo:pagoServicioModel.pseRecibo
           }
-           return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/pagoservicios/`+id, pagoServicioModelUpdate);
+           return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/pagoservicios/`+id, pagoServicioModelUpdate);
   
   }
  

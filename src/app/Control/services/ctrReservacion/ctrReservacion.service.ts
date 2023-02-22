@@ -8,7 +8,7 @@ import { CtrReservacionModel, CtrReservacionModelSave } from '../../models/ctrRe
 })
 export class CtrReservacionService {
 
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/control/reservacion";
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/reservacion";
 
   constructor(private http: HttpClient) { }
 

@@ -11,7 +11,7 @@ export class CtrAnuncioService {
 
   @Output() disparador: EventEmitter<any> = new EventEmitter();
 
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/control/anuncio";
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/anuncio";
 
   constructor(private http: HttpClient) { }
 

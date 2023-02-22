@@ -9,7 +9,7 @@ import { CtrReunionModel, CtrReunionModelSave } from '../../models/ctrReunion.mo
 export class CtrReunionService {
 
 
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/control/reunion";
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/reunion";
 
   constructor(private http: HttpClient) { }
 

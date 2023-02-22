@@ -12,7 +12,7 @@ export class CtrUsuarioService {
 
 
   public getUsuarios() {
-    return this.http.get<CtrUsuarioModel[]>('http://localhost:8080/web/api/rest/v1/control/usuario/all');
+    return this.http.get<CtrUsuarioModel[]>('http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/usuario/all');
   }
 
 }

@@ -11,20 +11,20 @@ export class FinIncidenciaService {
 constructor(private http: HttpClient) { }
 
 public getAllIncidenciasNoSolucionadas(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/nosolucionadas`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/nosolucionadas`;
   return this.http.get(url);
 }
 public getAllIncidenciasSolucionadas(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/solucionadas`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/solucionadas`;
   return this.http.get(url);
 }
 
 public getAllEvidenciaIncidencia(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/evidenciasnosolucionadas`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/evidenciasnosolucionadas`;
   return this.http.get(url);
 }
 public getAllEvidenciaSolucion(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/incidencia/evidenciassolucionadas`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/evidenciassolucionadas`;
   return this.http.get(url);
 }
 
@@ -41,7 +41,7 @@ public postIncidencia(incidenciaModel: any){
           incDescripcion:incidenciaModel.incDescripcion,
           incEvidenciaIndicencia:base64
         }
-         return this.http.post<string>(`http://localhost:8080/web/api/rest/v1/financiero/incidencia`, incidencia);
+         return this.http.post<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia`, incidencia);
       })
   );
 }
@@ -60,7 +60,7 @@ public putIncidenciaNoSolucionada(incidenciaModel: any, id:any, verificarImagen:
             incDescripcion:incidenciaModel.incDescripcion,
             incEvidenciaIndicencia:base64
           }
-           return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/incidencia/`+id, incidencia);
+           return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/`+id, incidencia);
         })
     );
   }else{
@@ -69,7 +69,7 @@ public putIncidenciaNoSolucionada(incidenciaModel: any, id:any, verificarImagen:
           incDescripcion:incidenciaModel.incDescripcion,
           incEvidenciaIndicencia:incidenciaModel.incEvidenciaIndicencia
         }
-         return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/incidencia/`+id, incidencia);
+         return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/`+id, incidencia);
   }
   
 }
@@ -86,7 +86,7 @@ public putIncidenciaSolucionNoSolucionada(incidenciaModel: any, id:any){
           var incidencia={
             incEvidenciaSolucion:base64
           }
-           return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/incidencia/solucion/`+id, incidencia);
+           return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/incidencia/solucion/`+id, incidencia);
         })
     );
 

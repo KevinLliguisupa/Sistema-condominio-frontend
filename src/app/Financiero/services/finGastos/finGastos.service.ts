@@ -11,18 +11,18 @@ constructor(private http: HttpClient) { }
 
 
 public getAllGastos(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/gasto`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/gasto`;
   return this.http.get(url);
 }
 
 public getAllRecibos(){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/gasto/recibos`;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/gasto/recibos`;
   return this.http.get(url);
 
 }
 
 public getAllGastosByIncidencia(id:any){
-  const url =`http://localhost:8080/web/api/rest/v1/financiero/gasto/incidencia/`+id;
+  const url =`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/gasto/incidencia/`+id;
   return this.http.get(url);
 }
 
@@ -41,7 +41,7 @@ public postGasto(gastoModel: any){
           gasPago:gastoModel.gasPago,
           gasRecibo:base64 
         }
-         return this.http.post<string>(`http://localhost:8080/web/api/rest/v1/financiero/gasto`, pago);
+         return this.http.post<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/gasto`, pago);
       })
   );
 }
@@ -57,7 +57,7 @@ public putGasto(gastoModel: any, id:any){
           var pago={
             gasRecibo:base64
           }
-           return this.http.put<string>(`http://localhost:8080/web/api/rest/v1/financiero/gasto/`+id, pago);
+           return this.http.put<string>(`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/gasto/`+id, pago);
         })
     );
 }

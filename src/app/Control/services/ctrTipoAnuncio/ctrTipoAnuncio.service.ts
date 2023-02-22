@@ -7,7 +7,7 @@ import { CtrTipoAnuncioModel, CtrTipoAnuncioModelAdd } from '../../models/ctrTip
   providedIn: 'root'
 })
 export class CtrTipoAnuncioService {
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/control/tipoanuncio";
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/control/tipoanuncio";
 
   constructor(private http: HttpClient) { }
 

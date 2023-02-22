@@ -9,7 +9,7 @@ constructor(private http: HttpClient) { }
 
 
 public getAllIngresos(){
-  const url=`http://localhost:8080/web/api/rest/v1/financiero/ingresodinero`;
+  const url=`http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/ingresodinero`;
   return this.http.get(url);
 }
 }
