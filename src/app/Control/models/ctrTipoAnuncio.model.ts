@@ -1,4 +1,8 @@
 export interface CtrTipoAnuncioModel {
-    tan_id:number;
-    tan_nombre:string;
+    tanId: number;
+    tanNombre: string;
+}
+
+export interface CtrTipoAnuncioModelAdd {
+    tanNombre: string;
 }

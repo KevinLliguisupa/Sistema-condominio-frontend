@@ -12,8 +12,18 @@ import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUs
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Core/Login/components/login.component';
 
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { CtrAnuncioComponent } from './Control/components/ctrAnuncio/ctrAnuncio.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessagesModule } from 'primeng/messages';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastModule } from 'primeng/toast';
+import { CtrTipoAnuncioComponent } from './Control/components/ctrTipoAnuncio/ctrTipoAnuncio.component';
+import { CtrLugarComponent } from './Control/components/ctrLugar/ctrLugar.component';
+import { CtrReunionComponent } from './Control/components/ctrReunion/ctrReunion.component';
+import { CtrReservacionComponent } from './Control/components/ctrReservacion/ctrReservacion.component';
 
 @NgModule({
 
@@ -24,22 +34,29 @@ import { ButtonModule } from 'primeng/button';
     HttpClientModule,
     CommonModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     DataTablesModule,
     BrowserAnimationsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule,
+    MessagesModule,
+    NgbModule,
+    ToastModule
   ],
   declarations: [
     AppComponent,
     FinMontoComponent,
     CtrUsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    CtrAnuncioComponent,
+    CtrTipoAnuncioComponent,
+    CtrLugarComponent,
+    CtrReunionComponent,
+    CtrReservacionComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-  }],
+  }, ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

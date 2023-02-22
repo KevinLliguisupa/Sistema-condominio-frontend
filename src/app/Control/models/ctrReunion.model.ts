@@ -1,7 +1,17 @@
+import { CtrLugarModel } from "./ctrLugar.model";
+
 export interface CtrReunionModel {
-    reu_id:number;
-    usu_cedula:string;
-    reu_fecha:Date;
-    reu_estado:boolean;
-    lug_id:number;
+    reuId: number;
+    usuCedula: string;
+    reuFecha: Date;
+    reuEstado: boolean;
+    lugId: CtrLugarModel;
 }
+
+export interface CtrReunionModelSave {
+    usuCedula?: string;
+    reuFecha: Date;
+    lugId: number;
+    reuId?: number;
+}
+

@@ -2,7 +2,7 @@
   <div class="row " style="margin-top: 50px;">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h6 class="m-0 font-weight-bold text-primary">Tipos de Anuncios</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Lista de lugares</h6>
         <button type="button" class="btn btn-primary" (click)="openAddModal()">
           Agregar
         </button>
@@ -15,13 +15,17 @@
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
+              </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let tipoAnuncio of tiposAnuncios">
-                <td>{{tipoAnuncio.tanId}}</td>
-                <td>{{tipoAnuncio.tanNombre}}</td>
+              <tr *ngFor="let lugar of lugares">
+                <td>{{lugar.lugId}}</td>
+                <td>{{lugar.lugNombre}}</td>
                 <td>
-                  <button (click)="delete(tipoAnuncio.tanId)" style="width: 25px; height: 35px;"
+                  <button (click)="openEditModal(lugar)" style="width: 25px; height: 35px; margin-right: 8px;"
+                    class="p-button-info p-button-rounded p-button-outlined p-button-sm" pButton type="button"
+                    icon="pi pi-file-edit" iconPos="left"></button>
+                  <button (click)="delete(lugar.lugId)" style="width: 25px; height: 35px;"
                     class="p-button-danger p-button-rounded p-button-outlined p-button-sm" pButton type="button"
                     icon="pi pi-times" iconPos="left"></button>
                 </td>
@@ -39,15 +43,17 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">Agregar</h1>
+          <h1 *ngIf="!isEdit; else editBlock" class="modal-title fs-5">Agregar</h1>
+          <ng-template #editBlock>
+            <h1 class="modal-title fs-5">Editar</h1>
+          </ng-template>
           <button type="button" class="btn-close" (click)="onCloseHandled()"></button>
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="nombre">Título</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Titulo"
-              [(ngModel)]="newTipoAnuncio.tanNombre">
-            <small *ngIf="errors.tanNombre" class="form-text text-danger">{{errors.tanNombre}} </small>
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Titulo" [(ngModel)]="newLugar.lugNombre">
+            <small *ngIf="errors.lugNombre" class="form-text text-danger">{{errors.lugNombre}} </small>
           </div>
         </div>
         <div class="modal-footer">

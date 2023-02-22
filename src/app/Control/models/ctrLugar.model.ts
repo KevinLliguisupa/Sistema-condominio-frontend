@@ -1,5 +1,10 @@
 export interface CtrLugarModel {
-    lug_id:number;
-    lug_nombre:string;
-    lug_disponible:boolean;
+    lugId: number;
+    lugNombre: string;
+    lugDisponible: boolean;
 }
+export interface CtrLugarModelSave {
+    lugId?: number;
+    lugNombre: string;
+}
+
