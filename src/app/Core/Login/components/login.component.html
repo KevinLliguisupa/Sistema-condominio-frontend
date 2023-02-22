@@ -1,9 +1,10 @@
 
-<div class="container py-5">
+<div class="container">
 
   <form class= "mx-auto" style="max-width: 30rem;" #form="ngForm" (ngSubmit)="login(form)" >
       <h1 class="mb-5 text-center" style="visibility: hidden" >.</h1>
       <h1 class="mb-5 text-center" >Inicio de sesión</h1>
+      <img src="../assets/images/tryLogo.png" alt="Logo" style="padding-left: 3rem; max-width: 25rem;" />
       <div class="mb-3">
         <label class="block text-center">Usuario</label>
           <input id="email" name="email" type="text" class="form-control" [(ngModel)]="creds.usuCedula">

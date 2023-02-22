@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FinMontoComponent } from 'src/app/Financiero/components/finMonto/finMonto.component';
 import { CtrUsuarioComponent } from 'src/app/Control/components/ctrUsuario/ctrUsuario.component';
@@ -29,6 +29,9 @@ import { FinPagoComponent } from './Financiero/components/finPago/finPago.compon
 import { NoFoundComponent } from './Core/no-found/no-found.component';
 import { FinTipoDeudaComponent } from './Financiero/components/finTipoDeuda/finTipoDeuda.component';
 import { FinIngresosGastosMensualesComponent } from './Financiero/components/finIngresosGastosMensuales/finIngresosGastosMensuales.component';
+import { MenuPrincipalCondominoComponent } from './Core/MenuPrincipalCondomino/MenuPrincipalCondomino.component';
+import { MenuPrincipalSecretarioComponent } from './Core/MenuPrincipalSecretario/MenuPrincipalSecretario.component';
+import { MenuPrincipalTesoreroComponent } from './Core/MenuPrincipalTesorero/MenuPrincipalTesorero.component';
 
 const routes: Routes = [
   { path:'',component: LoginComponent},
@@ -57,7 +60,12 @@ const routes: Routes = [
   { path:'reportegeneral',component:FinReporteGeneralComponent,canActivate:[AuthGuard]},
   {path:'tiposdeudas',component:FinTipoDeudaComponent, canActivate:[AuthGuard]},
   { path:'tiposservicios',component:FinTipoServicioComponent, canActivate:[AuthGuard]},
+  { path:'menucondomino',component: MenuPrincipalCondominoComponent,canActivate:[AuthGuard] },
+  {path:'menusecretario',component:MenuPrincipalSecretarioComponent ,canActivate:[AuthGuard]},
+  {path:'menutesorero',component:MenuPrincipalTesoreroComponent,canActivate:[AuthGuard] },
   { path:'**',component: NoFoundComponent}
+
+ 
   
 ];
 

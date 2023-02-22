@@ -24,3 +24,11 @@ export interface objectL{
   usuNombres: string,
   usuRol: string
 }
+
+export interface objectJWT{
+  exp: number,
+  sub: string,
+  usuCedula: string,
+  usuNombres: string
+
+}

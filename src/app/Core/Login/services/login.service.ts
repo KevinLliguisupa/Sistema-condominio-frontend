@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { CtrUsuarioModel, Credentials, CredentialsRol,objectL } from 'src/app/Control/models/ctrUsuario.model';
+import { CtrUsuarioModel, Credentials, CredentialsRol,objectJWT } from 'src/app/Control/models/ctrUsuario.model';
 import { HtmlParser } from '@angular/compiler';
 import { catchError, map } from 'rxjs/operators';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -37,7 +37,6 @@ export class LoginService {
       const headers = response.headers;
       const bearerToken = headers.get('Authorization')!;
       const token = bearerToken.replace('Bearer ', '');
-      console.log(token);
       localStorage.setItem('token', token);
     //  const m=jwt;
       var c= localStorage.getItem('token')!;
@@ -58,11 +57,9 @@ private saveToken(token:string):void{
 }
 
 
-  getRol():objectL{
+  getObjJWT():objectJWT{
     var c= localStorage.getItem('token')!;
-    var a: objectL = jwt_decode.default(c);
-
-    console.log(a.usuRol);
+    var a: objectJWT = jwt_decode.default(c);
     return a;
   }
 

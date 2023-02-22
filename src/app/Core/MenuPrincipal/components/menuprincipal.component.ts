@@ -17,7 +17,6 @@ export class MenuprincipalComponent implements OnInit {
   ) {
    }
   ngOnInit() {
-    console.log(this.rol.getRol());
   }
 
  register(form: NgForm){

@@ -57,6 +57,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastModule } from 'primeng/toast';
 import { CtrLugarComponent } from './Control/components/ctrLugar/ctrLugar.component';
 import { FinTipoDeudaComponent } from './Financiero/components/finTipoDeuda/finTipoDeuda.component';
+import { MenuPrincipalCondominoComponent } from './Core/MenuPrincipalCondomino/MenuPrincipalCondomino.component';
+import { NavegacionCondominosComponent } from './Core/navegacionCondominos/navegacionCondominos.component';
+import { MenuPrincipalSecretarioComponent } from './Core/MenuPrincipalSecretario/MenuPrincipalSecretario.component';
+import { NavegacionSecretarioComponent } from './Core/navegacionSecretario/navegacionSecretario.component';
+import { MenuPrincipalTesoreroComponent } from './Core/MenuPrincipalTesorero/MenuPrincipalTesorero.component';
+import { NavegacionTesoreroComponent } from './Core/navegacionTesorero/navegacionTesorero.component';
 
 @NgModule({
 
@@ -127,7 +133,13 @@ import { FinTipoDeudaComponent } from './Financiero/components/finTipoDeuda/finT
     CtrTipoAnuncioComponent,
     CtrLugarComponent,
     CtrReunionComponent,
-    CtrReservacionComponent
+    CtrReservacionComponent,
+    MenuPrincipalCondominoComponent,
+    NavegacionCondominosComponent,
+    MenuPrincipalSecretarioComponent,
+    NavegacionSecretarioComponent,
+    MenuPrincipalTesoreroComponent,
+    NavegacionTesoreroComponent
 
   ],
   providers: [{
