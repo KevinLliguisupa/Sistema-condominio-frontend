@@ -1,3 +1,5 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
 .header {
   height: 4rem;
   z-index: 1;

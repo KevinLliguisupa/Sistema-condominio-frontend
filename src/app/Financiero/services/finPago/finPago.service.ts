@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http'
 export class FinPagoService {
   @Output() disparador: EventEmitter<any> = new EventEmitter();
 
-  urlPath: string = "http://localhost:8080/web/api/rest/v1/financiero/cobros/pagos"
+  urlPath: string = "http://ec2-54-198-186-75.compute-1.amazonaws.com/web/api/rest/v1/financiero/cobros/pagos"
 
   constructor(private http: HttpClient) { }
 

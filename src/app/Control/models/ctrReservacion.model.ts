@@ -1,10 +1,22 @@
+import { CtrLugarModel } from "./ctrLugar.model";
+
 export interface CtrReservacionModel {
-    res_id:number;
-    lug_id:number;
-    usu_cedula:string;
-    res_fecha:Date;
-    res_hora_inicio:Date;
-    res_hora_fin:Date;
-    res_aprobado:boolean;
-    res_activa:boolean;
+    resId: number;
+    lugId: CtrLugarModel;
+    usuCedula: string;
+    resFecha: Date;
+    resHoraInicio: string;
+    resHoraFin: string;
+    resAprobado: boolean;
+    resActiva: boolean;
 }
+
+export interface CtrReservacionModelSave {
+    lugId: number;
+    usuCedula?: string;
+    resFecha: Date;
+    resHoraInicio: string;
+    resHoraFin: string;
+    resId?: number;
+}
+
